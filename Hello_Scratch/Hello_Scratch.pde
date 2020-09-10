@@ -14,18 +14,27 @@ class Parrot {
 }
 
 class Arrow {
-  float posX, posY, radian;
-  int radius = width + (width/2);  // radius = 150
-  
-  Arrow() {
-  }
+  float posX, posY, radian, leftHeadX, leftHeadY, rightHeadX, rightHeadY;
+  int arrowLength = 150;
+  int arrowheadLength = 40;
   
   void create() {
-    radian = atan2(height-mouseY, width-mouseX);
-    posY = width - (this.radius * sin(radian));
-    posX = height - (this.radius * cos(radian));
     
-    line(posX, posY, width, height);
+    // middle line of arrow
+    radian = atan2(height-mouseY, width-mouseX);
+    posY = (width-20) - (this.arrowLength * sin(radian)); // y = length x sin(angle)
+    posX = (height-20) - (this.arrowLength * cos(radian)); // x = length x cos(angle)
+    line(posX, posY, width-20, height-20);
+    
+    // left head of arrow : -15 degrees
+    leftHeadY = (width-20) - ((this.arrowLength - this.arrowheadLength) * sin(radian-radians(15)));  
+    leftHeadX = (height-20) - ((this.arrowLength - this.arrowheadLength) * cos(radian-radians(15)));
+    line(posX, posY, leftHeadX, leftHeadY);
+    
+    // right head of arrow : +15 degrees
+    rightHeadY = (width-20) - ((this.arrowLength - this.arrowheadLength) * sin(radian+radians(15)));
+    rightHeadX = (height-20) - ((this.arrowLength - this.arrowheadLength) * cos(radian+radians(15)));
+    line(posX, posY, rightHeadX, rightHeadY);
   }
 }
 
