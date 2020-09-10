@@ -14,16 +14,18 @@ class Parrot {
 }
 
 class Arrow {
-  float posX, posY;
+  float posX, posY, radian;
+  int radius = width + (width/2);  // radius = 150
   
   Arrow() {
   }
   
   void create() {
-    posX = mouseX - width/2;
-    posY = mouseY - height/2;
-    translate(width,height);
-    line(0, 0, posX, posY);
+    radian = atan2(height-mouseY, width-mouseX);
+    posY = width - (this.radius * sin(radian));
+    posX = height - (this.radius * cos(radian));
+    
+    line(posX, posY, width, height);
   }
 }
 
