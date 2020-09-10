@@ -1,4 +1,5 @@
 class Parrot {
+  float posX, posY;
   int size;
   
   Parrot(int tempSize) {
@@ -6,28 +7,31 @@ class Parrot {
   }
   
   void create() {
-    ellipse(mouseX, mouseY, size, size);
+    posX = mouseX;
+    posY = mouseY;
+    ellipse(posX, posY, size, size);
   }
 }
 
 class Arrow {
   float posX, posY;
   
-  Arrow(float tempX, float tempY) {
-    posX = tempX;
-    posY = tempY;
+  Arrow() {
   }
   
   void create() {
-    line(width,height,width-100,height-100);
+    posX = mouseX - width/2;
+    posY = mouseY - height/2;
+    translate(width,height);
+    line(0, 0, posX, posY);
   }
 }
 
 Parrot p1 = new Parrot(80);
-Arrow a1 = new Arrow(100,100);
+Arrow a1 = new Arrow();
 
 void setup() {
-  size(400,400);
+  size(640,640);
 }
 
 void draw() {
